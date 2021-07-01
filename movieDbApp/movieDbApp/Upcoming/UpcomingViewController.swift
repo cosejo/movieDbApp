@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  UpcomingViewController.swift
 //  movieDbApp
 //
 //  Created by Carlos Osejo on 6/30/21.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class UpcomingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
