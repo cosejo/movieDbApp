@@ -34,6 +34,8 @@
 		05DD7BDB268D4F2200EABAB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05DD7BDA268D4F2200EABAB5 /* Assets.xcassets */; };
 		05DD7BDE268D4F2200EABAB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05DD7BDC268D4F2200EABAB5 /* LaunchScreen.storyboard */; };
 		05DD7BE9268D4F2200EABAB5 /* movieDbAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DD7BE8268D4F2200EABAB5 /* movieDbAppTests.swift */; };
+		05EDBBC8268EABE600177B5F /* TopRatedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EDBBC7268EABE600177B5F /* TopRatedPresenter.swift */; };
+		05EDBBCA268EABF200177B5F /* PopularPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EDBBC9268EABF200177B5F /* PopularPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,8 @@
 		05DD7BE4268D4F2200EABAB5 /* movieDbAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = movieDbAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DD7BE8268D4F2200EABAB5 /* movieDbAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = movieDbAppTests.swift; sourceTree = "<group>"; };
 		05DD7BEA268D4F2200EABAB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05EDBBC7268EABE600177B5F /* TopRatedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedPresenter.swift; sourceTree = "<group>"; };
+		05EDBBC9268EABF200177B5F /* PopularPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				05DD7BD3268D4F2200EABAB5 /* PopularViewController.swift */,
+				05EDBBC9268EABF200177B5F /* PopularPresenter.swift */,
 			);
 			path = Popular;
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				05BF73C7268D69DA008AA7AF /* TopRatedViewController.swift */,
+				05EDBBC7268EABE600177B5F /* TopRatedPresenter.swift */,
 			);
 			path = TopRated;
 			sourceTree = "<group>";
@@ -361,6 +367,7 @@
 				05BF73E7268D7715008AA7AF /* ParameterEncoding.swift in Sources */,
 				05BF73E6268D7715008AA7AF /* JSONParameterEncoder.swift in Sources */,
 				05D4B950268D780F003FF6B4 /* EndPointType.swift in Sources */,
+				05EDBBC8268EABE600177B5F /* TopRatedPresenter.swift in Sources */,
 				05D4B951268D780F003FF6B4 /* HTTPMethod.swift in Sources */,
 				05D4B94E268D780F003FF6B4 /* HTTPTask.swift in Sources */,
 				05D4B94F268D780F003FF6B4 /* NetworkLogger.swift in Sources */,
@@ -369,6 +376,7 @@
 				05BF73D7268D7317008AA7AF /* UpcomingPresenter.swift in Sources */,
 				05BF73D5268D71E7008AA7AF /* MoviesContract.swift in Sources */,
 				05DD7BD6268D4F2200EABAB5 /* UpcomingViewController.swift in Sources */,
+				05EDBBCA268EABF200177B5F /* PopularPresenter.swift in Sources */,
 				05BF73C8268D69DA008AA7AF /* TopRatedViewController.swift in Sources */,
 				05DD7BD2268D4F2200EABAB5 /* AppDelegate.swift in Sources */,
 				0550A551268E65AD00CFF88E /* MoviesViewController.swift in Sources */,

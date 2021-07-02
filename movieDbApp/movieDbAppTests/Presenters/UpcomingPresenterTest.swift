@@ -9,17 +9,16 @@
 import XCTest
 @testable import movieDbApp
 
-class UpcomingPresenterTest: XCTestCase {
+class MoviesAppPresenterTest: XCTestCase {
     
-    var presenter : UpcomingPresenter?
-    var mockView : MockUpcomingView?
+    var presenter : MoviesAppPresenter?
+    var mockView : MockMoviesView?
     var mockNetworkManager: MockNetworkManager?
     
     override func setUp() {
         super.setUp()
-        mockView = MockUpcomingView()
+        mockView = MockMoviesView()
         mockNetworkManager = MockNetworkManager()
-        presenter = UpcomingPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
     }
     
     override func tearDown() {
@@ -32,6 +31,7 @@ class UpcomingPresenterTest: XCTestCase {
     func testFormatDate(){
         let date = Date(timeIntervalSinceReferenceDate: -123456789.0)
         let expectedDateFormatted = "1997-02-01"
+        presenter = MoviesAppPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
         
         let dateStringResult = presenter!.formatDateToString(date: date, format: "yyyy-MM-dd")
         
@@ -39,9 +39,10 @@ class UpcomingPresenterTest: XCTestCase {
     }
     
     /*
-     * Test Get Movies Method with successful response
+     * Test Get Upcoming Movies Method with successful response
      */
-    func testGetMoviesSuccessful(){
+    func testUpcomingGetMoviesSuccessful(){
+        presenter = UpcomingPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
         mockNetworkManager!.mockResponse = .success
         let getMoviesExpectation = self.expectation(description: "GetMoviesSuccessfull")
         getMoviesExpectation.isInverted = true
@@ -55,9 +56,10 @@ class UpcomingPresenterTest: XCTestCase {
     }
     
     /*
-     * Test Get Movies Method with successful response but empty array of movies
+     * Test Get Upcoming Movies Method with successful response but empty array of movies
      */
-    func testGetMoviesSuccessfulEmpty(){
+    func testUpcomingGetMoviesSuccessfulEmpty(){
+        presenter = UpcomingPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
         mockNetworkManager!.mockResponse = .emptySuccess
         let getMoviesExpectation = self.expectation(description: "GetMoviesSuccessfullEmpty")
         getMoviesExpectation.isInverted = true
@@ -71,9 +73,112 @@ class UpcomingPresenterTest: XCTestCase {
     }
     
     /*
-     * Test Get Movies Method with Error response
+     * Test Get Upcoming Movies Method with Error response
      */
-    func testGetMoviesError(){
+    func testGetUpcomingMoviesError(){
+        presenter = UpcomingPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
+        mockNetworkManager!.mockResponse = .error
+        let getMoviesExpectation = self.expectation(description: "GetMoviesError")
+        getMoviesExpectation.isInverted = true
+        
+        presenter!.getMovies()
+        
+        waitForExpectations(timeout: 3) {[weak self] (error) in
+            XCTAssertTrue(self?.mockView?.showMoviesCalledTimes == 0)
+            XCTAssertNil(self?.mockView?.receivedMovies)
+        }
+    }
+    
+    /*
+     * Test Get Popular Movies Method with successful response
+     */
+    func testPopularGetMoviesSuccessful(){
+        presenter = PopularPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
+        mockNetworkManager!.mockResponse = .success
+        let getMoviesExpectation = self.expectation(description: "GetMoviesSuccessfull")
+        getMoviesExpectation.isInverted = true
+        
+        presenter!.getMovies()
+        
+        waitForExpectations(timeout: 3) {[weak self] (error) in
+            XCTAssertTrue(self?.mockView?.showMoviesCalledTimes == 1)
+            XCTAssertTrue(self?.mockView?.receivedMovies?.count == 7)
+        }
+    }
+    
+    /*
+     * Test Get Popular Movies Method with successful response but empty array of movies
+     */
+    func testPopularGetMoviesSuccessfulEmpty(){
+        presenter = PopularPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
+        mockNetworkManager!.mockResponse = .emptySuccess
+        let getMoviesExpectation = self.expectation(description: "GetMoviesSuccessfullEmpty")
+        getMoviesExpectation.isInverted = true
+        
+        presenter!.getMovies()
+        
+        waitForExpectations(timeout: 3) {[weak self] (error) in
+            XCTAssertTrue(self?.mockView?.showMoviesCalledTimes == 1)
+            XCTAssertTrue(self?.mockView?.receivedMovies?.count == 0)
+        }
+    }
+    
+    /*
+     * Test Get Popular Movies Method with Error response
+     */
+    func testGetPopularMoviesError(){
+        presenter = PopularPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
+        mockNetworkManager!.mockResponse = .error
+        let getMoviesExpectation = self.expectation(description: "GetMoviesError")
+        getMoviesExpectation.isInverted = true
+        
+        presenter!.getMovies()
+        
+        waitForExpectations(timeout: 3) {[weak self] (error) in
+            XCTAssertTrue(self?.mockView?.showMoviesCalledTimes == 0)
+            XCTAssertNil(self?.mockView?.receivedMovies)
+        }
+    }
+    
+    /*
+     * Test Get TopRated Movies Method with successful response
+     */
+    func testTopRatedGetMoviesSuccessful(){
+        presenter = TopRatedPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
+        mockNetworkManager!.mockResponse = .success
+        let getMoviesExpectation = self.expectation(description: "GetMoviesSuccessfull")
+        getMoviesExpectation.isInverted = true
+        
+        presenter!.getMovies()
+        
+        waitForExpectations(timeout: 3) {[weak self] (error) in
+            XCTAssertTrue(self?.mockView?.showMoviesCalledTimes == 1)
+            XCTAssertTrue(self?.mockView?.receivedMovies?.count == 7)
+        }
+    }
+    
+    /*
+     * Test Get TopRated Movies Method with successful response but empty array of movies
+     */
+    func testTopRatedGetMoviesSuccessfulEmpty(){
+        presenter = TopRatedPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
+        mockNetworkManager!.mockResponse = .emptySuccess
+        let getMoviesExpectation = self.expectation(description: "GetMoviesSuccessfullEmpty")
+        getMoviesExpectation.isInverted = true
+        
+        presenter!.getMovies()
+        
+        waitForExpectations(timeout: 3) {[weak self] (error) in
+            XCTAssertTrue(self?.mockView?.showMoviesCalledTimes == 1)
+            XCTAssertTrue(self?.mockView?.receivedMovies?.count == 0)
+        }
+    }
+    
+    /*
+     * Test Get TopRated Movies Method with Error response
+     */
+    func testGetTopRatedMoviesError(){
+        presenter = TopRatedPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
         mockNetworkManager!.mockResponse = .error
         let getMoviesExpectation = self.expectation(description: "GetMoviesError")
         getMoviesExpectation.isInverted = true

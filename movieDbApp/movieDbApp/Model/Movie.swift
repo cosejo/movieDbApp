@@ -15,7 +15,7 @@ struct Movie {
     let id: Int
     let voteAverage: Double
     let title: String
-    let posterPath: String
+    let posterPath: String?
     let releaseDate: String?
 }
 
@@ -38,7 +38,7 @@ extension Movie: Decodable {
         id = try movieContainer.decode(Int.self, forKey: .id)
         voteAverage = try movieContainer.decode(Double.self, forKey: .voteAverage)
         title = try movieContainer.decode(String.self, forKey: .title)
-        posterPath = try movieContainer.decode(String.self, forKey: .posterPath)
+        posterPath = try? movieContainer.decode(String.self, forKey: .posterPath)
         releaseDate = try? movieContainer.decode(String.self, forKey: .releaseDate)
     }
 }
@@ -50,7 +50,7 @@ struct MovieDetail {
     let id: Int
     let voteAverage: Double
     let title: String
-    let posterPath: String
+    let posterPath: String?
     let releaseDate: String?
     let backdrop: String?
     let overview: String
@@ -65,7 +65,7 @@ extension MovieDetail: Decodable {
         id = try movieContainer.decode(Int.self, forKey: .id)
         voteAverage = try movieContainer.decode(Double.self, forKey: .voteAverage)
         title = try movieContainer.decode(String.self, forKey: .title)
-        posterPath = try movieContainer.decode(String.self, forKey: .posterPath)
+        posterPath = try? movieContainer.decode(String.self, forKey: .posterPath)
         releaseDate = try? movieContainer.decode(String.self, forKey: .releaseDate)
         backdrop = try? movieContainer.decode(String.self, forKey: .backdrop)
         overview = try movieContainer.decode(String.self, forKey: .overview)

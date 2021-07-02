@@ -14,9 +14,5 @@ class UpcomingViewController: MoviesViewController {
         presenter = UpcomingPresenter(view: self)
         super.viewDidLoad()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 }
 

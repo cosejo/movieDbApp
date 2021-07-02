@@ -8,18 +8,11 @@
 
 import UIKit
 
-class PopularViewController: UIViewController {
+class PopularViewController: MoviesViewController {
 
     override func viewDidLoad() {
+        presenter = PopularPresenter(view: self)
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 

@@ -49,6 +49,7 @@ extension MoviesViewController: MoviesView{
      * Show loading spinner
      */
     func showLoading() {
+        moviesActivityIndicatorView.startAnimating()
         overlayView.isHidden = false
         moviesActivityIndicatorView.isHidden = false
     }
@@ -57,6 +58,7 @@ extension MoviesViewController: MoviesView{
      * Hide loading spinner
      */
     func hideLoading() {
+        moviesActivityIndicatorView.stopAnimating()
         overlayView.isHidden = true
         moviesActivityIndicatorView.isHidden = true
     }
@@ -66,7 +68,7 @@ extension MoviesViewController: MoviesView{
      * Alow user to retry the loading or cancel
      */
     func showErrorMessage() {
-        let alert = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Ups", message: "Something happen with the movies, please try again.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Try again", style: .default, handler: {[weak self] (action) in
             self?.loadMovies()
         }))

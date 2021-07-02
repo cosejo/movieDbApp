@@ -9,7 +9,7 @@
 import Foundation
 @testable import movieDbApp
 
-class MockUpcomingView: MoviesView {
+class MockMoviesView: MoviesView {
     
     var loadMoviesCalledTimes = 0
     var showMoviesCalledTimes = 0
@@ -40,7 +40,7 @@ class MockUpcomingView: MoviesView {
     }
 }
 
-extension UpcomingPresenter {
+extension MoviesAppPresenter {
     convenience init(view: MoviesView, mockNetworkManager: NetworkManager) {
         self.init(view: view)
         networkManager = mockNetworkManager
