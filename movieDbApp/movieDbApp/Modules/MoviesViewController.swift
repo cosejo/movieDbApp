@@ -21,7 +21,6 @@ class MoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        moviesTableView.register(MovieCell.self, forCellReuseIdentifier: movieCellIdentifier)
         loadMovies()
     }
     
@@ -80,6 +79,13 @@ extension MoviesViewController: MoviesView{
 }
 
 extension MoviesViewController: UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movieId =  movies[indexPath.row].id
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MovieDetailViewController") as! MovieDetailViewController
+        controller.movieId = movieId
+        self.navigationController!.pushViewController(controller, animated: true)
+    }
 }
 
 extension MoviesViewController: UITableViewDataSource{

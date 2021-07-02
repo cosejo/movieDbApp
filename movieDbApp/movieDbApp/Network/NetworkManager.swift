@@ -25,6 +25,7 @@ enum Result<String>{
 
 protocol NetworkManager {
     func getMovies(category: MoviesCategory, page: Int, date: String, completion: @escaping (_ movie: [Movie]?,_ error: String?)->())
+    func getMovieDetail(id: Int, completion: @escaping (_ movieDetail: MovieDetail?,_ error: String?)->())
 }
 
 struct MoviesNetworkManager : NetworkManager {
@@ -59,6 +60,34 @@ struct MoviesNetworkManager : NetworkManager {
                     do {
                         let apiResponse = try JSONDecoder().decode(MovieApiResponse.self, from: responseData)
                         completion(apiResponse.movies,nil)
+                    }catch {
+                        print(error)
+                        completion(nil, NetworkResponse.unableToDecode.rawValue)
+                    }
+                case .failure(let networkFailureError):
+                    completion(nil, networkFailureError)
+                }
+            }
+        }
+    }
+    
+    func getMovieDetail(id: Int, completion: @escaping (_ movieDetail: MovieDetail?,_ error: String?)->()){
+        router.request(.movieDetails(id: id)) { (data, response, error) in
+            if error != nil {
+                completion(nil, "Please check your network connection.")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    do {
+                        let movieDetail = try JSONDecoder().decode(MovieDetail.self, from: responseData)
+                        completion(movieDetail, nil)
                     }catch {
                         print(error)
                         completion(nil, NetworkResponse.unableToDecode.rawValue)
