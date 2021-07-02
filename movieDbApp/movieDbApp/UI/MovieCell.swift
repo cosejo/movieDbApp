@@ -22,7 +22,7 @@ class MovieCell: UITableViewCell {
     func updateCell(title: String, releaseDate: String?, voteAverage: Double, posterPath: String?) {
         titleLabel.text = title
         releaseDateLabel.text = releaseDate ?? "TBD"
-        voteAverageLabel.text = "\(voteAverage)"
+        voteAverageLabel.text = voteAverage == 0 ? "No votes registered" : "\(voteAverage*10)%"
         posterImageView.loadImage(url: posterPath)
     }
     
@@ -34,7 +34,7 @@ extension UIImageView {
         guard url != nil && !url!.isEmpty else {
             return
         }
-        let url = URL(string: "https://image.tmdb.org/t/p/w500/\(url!)")
+        let url = URL(string: "https://image.tmdb.org/t/p/original/\(url!)")
         
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: url!)

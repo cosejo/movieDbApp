@@ -12,12 +12,20 @@ public enum MovieApi {
     case popular(page:Int)
     case upcoming(page:Int, date: String)
     case topRated(page:Int)
+    case movieDetails(id:Int)
 }
 
 extension MovieApi: EndPointType {
     
     var environmentBaseURL : String {
-        return "https://api.themoviedb.org/4/discover/"
+        let baseURLV3 = "https://api.themoviedb.org/3/"
+        let baseURLV4 = "https://api.themoviedb.org/4/"
+        switch self {
+        case .movieDetails(_):
+            return baseURLV3
+        default:
+            return baseURLV4
+        }
     }
     
     var baseURL: URL {
@@ -26,7 +34,12 @@ extension MovieApi: EndPointType {
     }
     
     var path: String {
-        return "movie"
+        switch self {
+        case .movieDetails(let id):
+            return "movie/\(id)"
+        default:
+            return "discover/movie"
+        }
     }
     
     var httpMethod: HTTPMethod {
@@ -47,6 +60,10 @@ extension MovieApi: EndPointType {
             return .requestParameters(bodyParameters: nil,
                                       bodyEncoding: .urlEncoding,
                                       urlParameters: ["sort_by" : "vote_average.desc", "page" : page])
+        case .movieDetails(_):
+            return .requestParameters(bodyParameters: nil,
+                                      bodyEncoding: .urlEncoding,
+                                      urlParameters: [:])
         }
     }
     
