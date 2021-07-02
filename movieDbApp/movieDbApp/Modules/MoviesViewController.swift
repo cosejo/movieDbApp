@@ -10,6 +10,8 @@ import UIKit
 
 class MoviesViewController: UIViewController {
     
+    let movieCellIdentifier = "movieCell"
+    
     @IBOutlet weak var moviesTableView: UITableView!
     @IBOutlet weak var moviesActivityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var overlayView: UIView!
@@ -19,7 +21,7 @@ class MoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        moviesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "movieCell")
+//        moviesTableView.register(MovieCell.self, forCellReuseIdentifier: movieCellIdentifier)
         loadMovies()
     }
     
@@ -86,8 +88,9 @@ extension MoviesViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath) as UITableViewCell
-        cell.textLabel?.text = movies[indexPath.row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: movieCellIdentifier, for: indexPath) as! MovieCell
+        let movie =  movies[indexPath.row]
+        cell.updateCell(title: movie.title, releaseDate: movie.releaseDate, voteAverage: movie.voteAverage, posterPath: movie.posterPath)
         return cell
     }
 }
