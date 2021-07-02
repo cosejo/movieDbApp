@@ -18,9 +18,11 @@ protocol MoviesView {
     func showLoading()
     func hideLoading()
     func showErrorMessage()
+    func reloadSearchMovies(movies: [Movie])
 }
 
 protocol MoviesPresenter {
     func getMovies()
     func getMovies(category: MoviesCategory)
+    func getSearchMovies(searchText: String)
 }

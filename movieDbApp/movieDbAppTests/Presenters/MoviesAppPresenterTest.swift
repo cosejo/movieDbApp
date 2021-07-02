@@ -39,6 +39,41 @@ class MoviesAppPresenterTest: XCTestCase {
     }
     
     /*
+     * Test Format Date method
+     */
+    func testSearchMoviesWithMatch(){
+        presenter = UpcomingPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
+        mockNetworkManager!.mockResponse = .success
+        let getMoviesExpectation = self.expectation(description: "GetMoviesSuccessfull")
+        getMoviesExpectation.isInverted = true
+        presenter!.getMovies()
+        wait(for: [getMoviesExpectation], timeout: 3)
+        
+        presenter?.getSearchMovies(searchText: "T")
+        
+        let searchedMovies = mockView?.searchedMovies
+        XCTAssertTrue(searchedMovies?.count == 2)
+        XCTAssertTrue(mockView?.reloadSearchMoviesCalledTimes == 1)
+        XCTAssertTrue(searchedMovies![0].title == "Titanic")
+        XCTAssertTrue(searchedMovies![1].title == "The Incredible Hulk")
+    }
+    
+    func testSearchMoviesWithNoMatch(){
+        presenter = UpcomingPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
+        mockNetworkManager!.mockResponse = .success
+        let getMoviesExpectation = self.expectation(description: "GetMoviesSuccessfull")
+        getMoviesExpectation.isInverted = true
+        presenter!.getMovies()
+        wait(for: [getMoviesExpectation], timeout: 3)
+        
+        presenter?.getSearchMovies(searchText: "Y")
+        
+        let searchedMovies = mockView?.searchedMovies
+        XCTAssertTrue(mockView?.reloadSearchMoviesCalledTimes == 1)
+        XCTAssertTrue(searchedMovies?.count == 0)
+    }
+    
+    /*
      * Test Get Upcoming Movies Method with successful response
      */
     func testUpcomingGetMoviesSuccessful(){

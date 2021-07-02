@@ -16,7 +16,9 @@ class MockMoviesView: MoviesView {
     var showLoadingCalledTimes = 0
     var hideLoadingCalledTimes = 0
     var showErrorMessageCalledTimes = 0
+    var reloadSearchMoviesCalledTimes = 0
     var receivedMovies: [Movie]?
+    var searchedMovies: [Movie]?
     
     func loadMovies() {
         loadMoviesCalledTimes += 1
@@ -37,6 +39,11 @@ class MockMoviesView: MoviesView {
     
     func showErrorMessage() {
         showErrorMessageCalledTimes += 1
+    }
+    
+    func reloadSearchMovies(movies: [Movie]) {
+        reloadSearchMoviesCalledTimes += 1
+        searchedMovies = movies
     }
 }
 
