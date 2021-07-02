@@ -19,7 +19,7 @@ class MockNetworkManager: NetworkManager {
     
     let movies = [Movie.init(id: 1, voteAverage: 10.5, title: "Titanic", posterPath: "MockposterPath", releaseDate: "2020-07-01"),
                   Movie.init(id: 2, voteAverage: 80.5, title: "Fast 5", posterPath: "MockposterPath", releaseDate: "2020-07-01"),
-                  Movie.init(id: 3, voteAverage: 71.7, title: "Incpetion", posterPath: "MockposterPath", releaseDate: "2020-07-01"),
+                  Movie.init(id: 3, voteAverage: 71.7, title: "Inception", posterPath: "MockposterPath", releaseDate: "2020-07-01"),
                   Movie.init(id: 4, voteAverage: 90.3, title: "The Incredible Hulk", posterPath: "MockposterPath", releaseDate: "2020-07-01"),
                   Movie.init(id: 5, voteAverage: 87.2, title: "Avengers", posterPath: "MockposterPath", releaseDate: "2020-07-01"),
                   Movie.init(id: 6, voteAverage: 22.1, title: "Jumanji", posterPath: "MockposterPath", releaseDate: "2020-07-01"),
