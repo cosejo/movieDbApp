@@ -10,8 +10,6 @@ import Foundation
 
 public struct URLParameterEncoder: ParameterEncoder {
     
-    let MovieAPIKey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYzFjNDI2NmU3OGJlMzExNzBhMzc4MDNjN2NmNjA5ZSIsInN1YiI6IjYwZGQxZDFhMmQzNzIxMDA3ZTc0MmNiYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lAk6zAi0ykEDUh39HJbqtGNCWgejaCYDWoYyPWnSlg8"
-    
     public func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws {
         
         guard let url = urlRequest.url else { throw NetworkError.missingURL }
@@ -32,7 +30,5 @@ public struct URLParameterEncoder: ParameterEncoder {
         if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
             urlRequest.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
         }
-        
-        urlRequest.setValue("Bearer " + MovieAPIKey, forHTTPHeaderField: "authorization")
     }
 }

@@ -1,5 +1,5 @@
 //
-//  NetworkManager.swift
+//  MoviesNetworkManager.swift
 //  NetworkLayer
 //
 //  Created by Malcolm Kumwenda on 2018/03/11.
@@ -23,14 +23,18 @@ enum Result<String>{
     case failure(String)
 }
 
-struct NetworkManager {
+protocol NetworkManager {
+    func getMovies(category: MoviesCategory, page: Int, date: String, completion: @escaping (_ movie: [Movie]?,_ error: String?)->())
+}
+
+struct MoviesNetworkManager : NetworkManager {
     let router = Router<MovieApi>()
     
-    func getNewMovies(category: MoviesCategory, page: Int, completion: @escaping (_ movie: [Movie]?,_ error: String?)->()){
+    func getMovies(category: MoviesCategory, page: Int, date: String = "", completion: @escaping (_ movie: [Movie]?,_ error: String?)->()){
         let requestCategory: MovieApi
         switch category {
         case .upcoming:
-            requestCategory = MovieApi.upcoming(page: page)
+            requestCategory = MovieApi.upcoming(page: page, date: date)
             break
         case .popular:
             requestCategory = MovieApi.popular(page: page)

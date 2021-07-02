@@ -6,12 +6,21 @@
 //  Copyright © 2021 Carlos Osejo. All rights reserved.
 //
 
+public enum MoviesCategory : Int {
+    case upcoming
+    case popular
+    case topRated
+}
+
 protocol MoviesView {
     func loadMovies()
+    func showMovies(movies: [Movie])
     func showLoading()
     func hideLoading()
+    func showErrorMessage()
 }
 
 protocol MoviesPresenter {
     func getMovies()
+    func getMovies(category: MoviesCategory)
 }

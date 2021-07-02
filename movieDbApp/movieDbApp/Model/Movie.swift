@@ -8,15 +8,15 @@
 
 import Foundation
 
+/*
+ * Movie Detail Structure
+ */
 struct Movie {
     let id: Int
     let voteAverage: Double
     let title: String
     let posterPath: String
-    let backdrop: String?
     let releaseDate: String?
-    let overview: String
-    let video: Bool
 }
 
 extension Movie: Decodable {
@@ -32,7 +32,6 @@ extension Movie: Decodable {
         case video
     }
     
-    
     init(from decoder: Decoder) throws {
         let movieContainer = try decoder.container(keyedBy: MovieCodingKeys.self)
         
@@ -40,8 +39,35 @@ extension Movie: Decodable {
         voteAverage = try movieContainer.decode(Double.self, forKey: .voteAverage)
         title = try movieContainer.decode(String.self, forKey: .title)
         posterPath = try movieContainer.decode(String.self, forKey: .posterPath)
-        backdrop = try? movieContainer.decode(String.self, forKey: .backdrop)
         releaseDate = try? movieContainer.decode(String.self, forKey: .releaseDate)
+    }
+}
+
+/*
+ * Movie Detail Structure
+ */
+struct MovieDetail {
+    let id: Int
+    let voteAverage: Double
+    let title: String
+    let posterPath: String
+    let releaseDate: String?
+    let backdrop: String?
+    let overview: String
+    let video: Bool
+}
+
+extension MovieDetail: Decodable {
+    
+    init(from decoder: Decoder) throws {
+        let movieContainer = try decoder.container(keyedBy: Movie.MovieCodingKeys.self)
+        
+        id = try movieContainer.decode(Int.self, forKey: .id)
+        voteAverage = try movieContainer.decode(Double.self, forKey: .voteAverage)
+        title = try movieContainer.decode(String.self, forKey: .title)
+        posterPath = try movieContainer.decode(String.self, forKey: .posterPath)
+        releaseDate = try? movieContainer.decode(String.self, forKey: .releaseDate)
+        backdrop = try? movieContainer.decode(String.self, forKey: .backdrop)
         overview = try movieContainer.decode(String.self, forKey: .overview)
         video = try movieContainer.decode(Bool.self, forKey: .video)
     }

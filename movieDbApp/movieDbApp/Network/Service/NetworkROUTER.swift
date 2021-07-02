@@ -41,6 +41,7 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
         var request = URLRequest(url: route.baseURL.appendingPathComponent(route.path),
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
                                  timeoutInterval: 10.0)
+        request.allHTTPHeaderFields = route.headers
         switch route.task {
         case .request:
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
