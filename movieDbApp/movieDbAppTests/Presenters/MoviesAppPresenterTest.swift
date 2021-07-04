@@ -39,7 +39,7 @@ class MoviesAppPresenterTest: XCTestCase {
     }
     
     /*
-     * Test Format Date method
+     * Test Search movies with a match
      */
     func testSearchMoviesWithMatch(){
         presenter = UpcomingPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
@@ -58,6 +58,10 @@ class MoviesAppPresenterTest: XCTestCase {
         XCTAssertTrue(searchedMovies![1].title == "The Incredible Hulk")
     }
     
+    
+    /*
+     * Test Search movies without a match
+     */
     func testSearchMoviesWithNoMatch(){
         presenter = UpcomingPresenter(view: mockView!, mockNetworkManager: mockNetworkManager!)
         mockNetworkManager!.mockResponse = .success
