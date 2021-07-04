@@ -11,6 +11,8 @@ import UIKit
 class MoviesViewController: UIViewController {
     
     let movieCellIdentifier = "movieCell"
+    let loadingCellIdentifier = "LoadingCell"
+    let movieDetailViewControllerIdentifier = "MovieDetailViewController"
     
     @IBOutlet weak var moviesTableView: UITableView!
     @IBOutlet weak var moviesActivityIndicatorView: UIActivityIndicatorView!
@@ -21,10 +23,14 @@ class MoviesViewController: UIViewController {
     var movies: [Movie] = []
     var searchedMovies: [Movie] = []
     var searching = false
+    var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.moviesSearchBar.delegate = self
+        let tableViewLoadingCellNib = UINib(nibName: loadingCellIdentifier, bundle: nil)
+        moviesTableView.register(tableViewLoadingCellNib, forCellReuseIdentifier: loadingCellIdentifier)
+        showLoading()
         loadMovies()
     }
     
@@ -39,7 +45,10 @@ extension MoviesViewController: MoviesView{
      * Load Movies
      */
     func loadMovies() {
-        presenter?.getMovies()
+        if !isLoading {
+            isLoading = true
+            presenter?.getMovies()
+        }
     }
     
     /*
@@ -63,6 +72,7 @@ extension MoviesViewController: MoviesView{
      * Hide loading spinner
      */
     func hideLoading() {
+        isLoading = false
         moviesActivityIndicatorView.stopAnimating()
         overlayView.isHidden = true
         moviesActivityIndicatorView.isHidden = true
@@ -73,8 +83,10 @@ extension MoviesViewController: MoviesView{
      * Alow user to retry the loading or cancel
      */
     func showErrorMessage() {
+        isLoading = false
         let alert = UIAlertController(title: "Ups", message: "Something happen with the movies, please try again.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Try again", style: .default, handler: {[weak self] (action) in
+            self?.showLoading()
             self?.loadMovies()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
@@ -94,23 +106,56 @@ extension MoviesViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movieId =  searching ? searchedMovies[indexPath.row].id : movies[indexPath.row].id
-        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MovieDetailViewController") as! MovieDetailViewController
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: movieDetailViewControllerIdentifier) as! MovieDetailViewController
         controller.movieId = movieId
         self.navigationController!.pushViewController(controller, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if (offsetY > contentHeight - scrollView.frame.size.height) && !isLoading {
+            loadMovies()
+        }
     }
 }
 
 extension MoviesViewController: UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 60
+        } else {
+            return 44
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searching ? searchedMovies.count : movies.count
-        
+        if section == 0 {
+            return searching ? searchedMovies.count : movies.count
+        }
+        else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: movieCellIdentifier, for: indexPath) as! MovieCell
-        let movie =  searching ? searchedMovies[indexPath.row] : movies[indexPath.row]
-        cell.updateCell(title: movie.title, releaseDate: movie.releaseDate, voteAverage: movie.voteAverage, posterPath: movie.posterPath)
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: movieCellIdentifier, for: indexPath) as! MovieCell
+            let movie =  searching ? searchedMovies[indexPath.row] : movies[indexPath.row]
+            cell.updateCell(title: movie.title, releaseDate: movie.releaseDate, voteAverage: movie.voteAverage, posterPath: movie.posterPath)
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: loadingCellIdentifier, for: indexPath) as! LoadingCell
+            cell.startLoading()
+            return cell
+        }
     }
 }
 
