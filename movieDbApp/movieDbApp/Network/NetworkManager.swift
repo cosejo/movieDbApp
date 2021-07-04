@@ -26,9 +26,11 @@ enum Result<String>{
 protocol NetworkManager {
     func getMovies(category: MoviesCategory, page: Int, date: String, completion: @escaping (_ movie: [Movie]?,_ error: String?)->())
     func getMovieDetail(id: Int, completion: @escaping (_ movieDetail: MovieDetail?,_ error: String?)->())
+    func getVideo(movieId: Int, completion: @escaping (_ videoId: String?,_ error: String?)->())
 }
 
 struct MoviesNetworkManager : NetworkManager {
+    
     let router = Router<MovieApi>()
     
     func getMovies(category: MoviesCategory, page: Int, date: String = "", completion: @escaping (_ movie: [Movie]?,_ error: String?)->()){
@@ -88,6 +90,34 @@ struct MoviesNetworkManager : NetworkManager {
                     do {
                         let movieDetail = try JSONDecoder().decode(MovieDetail.self, from: responseData)
                         completion(movieDetail, nil)
+                    }catch {
+                        print(error)
+                        completion(nil, NetworkResponse.unableToDecode.rawValue)
+                    }
+                case .failure(let networkFailureError):
+                    completion(nil, networkFailureError)
+                }
+            }
+        }
+    }
+    
+    func getVideo(movieId: Int, completion: @escaping (String?, String?) -> ()) {
+        router.request(.movieVideo(id: movieId)) { (data, response, error) in
+            if error != nil {
+                completion(nil, "Please check your network connection.")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    do {
+                        let videoResponse = try JSONDecoder().decode(VideoApiResponse.self, from: responseData)
+                        completion(videoResponse.videos.first?.key, nil)
                     }catch {
                         print(error)
                         completion(nil, NetworkResponse.unableToDecode.rawValue)

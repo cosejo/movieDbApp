@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050EFF9D269198BA0094DEBA /* VideoContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050EFF9C269198BA0094DEBA /* VideoContract.swift */; };
+		050EFF9F269198CF0094DEBA /* PlayVideoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050EFF9E269198CF0094DEBA /* PlayVideoPresenter.swift */; };
+		050EFFA126919B120094DEBA /* VideoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050EFFA026919B120094DEBA /* VideoResponse.swift */; };
+		050EFFA326919B8D0094DEBA /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050EFFA226919B8D0094DEBA /* Video.swift */; };
+		053D9540268F08CB00D8A52B /* PlayVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053D953F268F08CB00D8A52B /* PlayVideoViewController.swift */; };
 		0550A54F268E550300CFF88E /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0550A54E268E550300CFF88E /* MovieResponse.swift */; };
 		0550A551268E65AD00CFF88E /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0550A550268E65AD00CFF88E /* MoviesViewController.swift */; };
 		0550A554268E702800CFF88E /* MoviesAppPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0550A553268E702800CFF88E /* MoviesAppPresenterTest.swift */; };
@@ -55,6 +60,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		050EFF9C269198BA0094DEBA /* VideoContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoContract.swift; sourceTree = "<group>"; };
+		050EFF9E269198CF0094DEBA /* PlayVideoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayVideoPresenter.swift; sourceTree = "<group>"; };
+		050EFFA026919B120094DEBA /* VideoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoResponse.swift; sourceTree = "<group>"; };
+		050EFFA226919B8D0094DEBA /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		053D953F268F08CB00D8A52B /* PlayVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayVideoViewController.swift; sourceTree = "<group>"; };
 		0550A54E268E550300CFF88E /* MovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		0550A550268E65AD00CFF88E /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		0550A553268E702800CFF88E /* MoviesAppPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesAppPresenterTest.swift; sourceTree = "<group>"; };
@@ -114,10 +124,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		050EFF9B269198990094DEBA /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				053D953F268F08CB00D8A52B /* PlayVideoViewController.swift */,
+				050EFF9C269198BA0094DEBA /* VideoContract.swift */,
+				050EFF9E269198CF0094DEBA /* PlayVideoPresenter.swift */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
 		0550A54D268E54DD00CFF88E /* Response */ = {
 			isa = PBXGroup;
 			children = (
 				0550A54E268E550300CFF88E /* MovieResponse.swift */,
+				050EFFA026919B120094DEBA /* VideoResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -229,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				05D4B954268D795E003FF6B4 /* Movie.swift */,
+				050EFFA226919B8D0094DEBA /* Video.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -288,6 +310,7 @@
 		05EDBBCE268ED7D700177B5F /* MovieDetail */ = {
 			isa = PBXGroup;
 			children = (
+				050EFF9B269198990094DEBA /* Video */,
 				05EDBBCF268ED7F100177B5F /* MovieDetailContract.swift */,
 				05EDBBD1268ED7FC00177B5F /* MovieDetailPresenter.swift */,
 				05EDBBD3268ED80900177B5F /* MovieDetailViewController.swift */,
@@ -400,9 +423,11 @@
 			files = (
 				05BF73E7268D7715008AA7AF /* ParameterEncoding.swift in Sources */,
 				05BF73E6268D7715008AA7AF /* JSONParameterEncoder.swift in Sources */,
+				050EFF9F269198CF0094DEBA /* PlayVideoPresenter.swift in Sources */,
 				05D4B950268D780F003FF6B4 /* EndPointType.swift in Sources */,
 				05EDBBC8268EABE600177B5F /* TopRatedPresenter.swift in Sources */,
 				05EDBBD4268ED80900177B5F /* MovieDetailViewController.swift in Sources */,
+				053D9540268F08CB00D8A52B /* PlayVideoViewController.swift in Sources */,
 				05D4B951268D780F003FF6B4 /* HTTPMethod.swift in Sources */,
 				05D4B94E268D780F003FF6B4 /* HTTPTask.swift in Sources */,
 				05D4B94F268D780F003FF6B4 /* NetworkLogger.swift in Sources */,
@@ -411,6 +436,7 @@
 				05EDBBD2268ED7FC00177B5F /* MovieDetailPresenter.swift in Sources */,
 				05BF73D7268D7317008AA7AF /* UpcomingPresenter.swift in Sources */,
 				05BF73D5268D71E7008AA7AF /* MoviesContract.swift in Sources */,
+				050EFFA126919B120094DEBA /* VideoResponse.swift in Sources */,
 				05DD7BD6268D4F2200EABAB5 /* UpcomingViewController.swift in Sources */,
 				05EDBBCA268EABF200177B5F /* PopularPresenter.swift in Sources */,
 				05EDBBD0268ED7F100177B5F /* MovieDetailContract.swift in Sources */,
@@ -419,9 +445,11 @@
 				0550A551268E65AD00CFF88E /* MoviesViewController.swift in Sources */,
 				05EDBBCD268EB75400177B5F /* MovieCell.swift in Sources */,
 				05DD7BD4268D4F2200EABAB5 /* PopularViewController.swift in Sources */,
+				050EFF9D269198BA0094DEBA /* VideoContract.swift in Sources */,
 				05D4B943268D77EC003FF6B4 /* MovieEndPoint.swift in Sources */,
 				0550A54F268E550300CFF88E /* MovieResponse.swift in Sources */,
 				05D4B945268D77FB003FF6B4 /* NetworkManager.swift in Sources */,
+				050EFFA326919B8D0094DEBA /* Video.swift in Sources */,
 				05BF73E8268D7715008AA7AF /* URLParameterEncoding.swift in Sources */,
 				0550A557268E70EC00CFF88E /* MoviesAppPresenter.swift in Sources */,
 			);
