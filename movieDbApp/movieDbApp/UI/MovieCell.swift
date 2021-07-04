@@ -30,6 +30,10 @@ class MovieCell: UITableViewCell {
 
 extension UIImageView {
     
+    /*
+     * Load Image from an URL in the background
+     * - Parameter url: The string url of the file image
+     */
     func loadImage(url: String?) {
         guard url != nil && !url!.isEmpty else {
             return
