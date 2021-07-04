@@ -318,6 +318,52 @@
             </objects>
             <point key="canvasLocation" x="2477.5999999999999" y="-269.41529235382313"/>
         </scene>
+        <!--Play Video View Controller-->
+        <scene sceneID="4Yo-zV-MCE">
+            <objects>
+                <viewController storyboardIdentifier="PlayVideoViewController" id="Ksr-4P-Bel" customClass="PlayVideoViewController" customModule="movieDbApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QmM-DS-D1r">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7N-9v-iff">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Feg-dz-Zb6">
+                                <rect key="frame" x="0.0" y="10" width="375" height="647"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36595456500000001" green="0.36595456500000001" blue="0.36595456500000001" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Cei-gg-M5b">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" cocoaTouchSystemColor="darkTextColor"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="t7N-9v-iff" firstAttribute="top" secondItem="JIp-mJ-830" secondAttribute="top" id="0UO-rR-yrn"/>
+                            <constraint firstItem="t7N-9v-iff" firstAttribute="leading" secondItem="JIp-mJ-830" secondAttribute="leading" id="JCu-cd-ZNu"/>
+                            <constraint firstItem="JIp-mJ-830" firstAttribute="trailing" secondItem="t7N-9v-iff" secondAttribute="trailing" id="Svx-NL-0IZ"/>
+                            <constraint firstItem="JIp-mJ-830" firstAttribute="bottom" secondItem="t7N-9v-iff" secondAttribute="bottom" id="lX6-fp-dMm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JIp-mJ-830"/>
+                    </view>
+                    <connections>
+                        <outlet property="overlayView" destination="Feg-dz-Zb6" id="bVh-F4-EMo"/>
+                        <outlet property="videoActivityIndicatorView" destination="Cei-gg-M5b" id="O5C-Ox-rY9"/>
+                        <outlet property="videoWebVIew" destination="t7N-9v-iff" id="DpF-fD-3C3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tY2-Bn-HQi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3182" y="-293"/>
+        </scene>
         <!--Popular-->
         <scene sceneID="wg7-f3-ORb">
             <objects>

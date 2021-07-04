@@ -38,6 +38,9 @@ class MovieDetailViewController: UIViewController {
     }
     
     @IBAction func openVideo(_ sender: UIButton) {
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "PlayVideoViewController") as! PlayVideoViewController
+        controller.movieId = movieId
+        self.navigationController!.pushViewController(controller, animated: true)
     }
     
     @IBAction func openWebSite(_ sender: UIButton) {
@@ -69,8 +72,8 @@ extension MovieDetailViewController : DetailView {
         statusLabel.text = movie.status
         webSiteButton.isEnabled = movie.homepage != nil
         movieWebSite = movie.homepage
-        videoButton.isEnabled = movie.video
         posterImageView.loadImage(url: movie.posterPath)
+        videoButton.isEnabled = true
     }
     
     /*

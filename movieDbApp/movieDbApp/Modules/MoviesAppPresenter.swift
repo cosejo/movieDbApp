@@ -26,7 +26,6 @@ class MoviesAppPresenter: MoviesPresenter {
      * Retrieve movies from source
      */
     func getMovies(category: MoviesCategory) {
-        view.showLoading()
         let currentDateAsString = formatDateToString(date: Date(), format: requestDateFormat)
         networkManager?.getMovies(category: category, page: moviesPageIndex, date: currentDateAsString, completion: { [weak self] movies, error in
             if error == nil {
